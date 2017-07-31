@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    protected $guarded = [];
+
     public function moyu()
     {
       return $this->belongsTo('App\Moyu');

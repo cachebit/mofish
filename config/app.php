@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', '喵噗 - 占着鱼塘看摸鱼吧 - myuup.com'),
 
     /*
     |--------------------------------------------------------------------------

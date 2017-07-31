@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('/moyus', 'MoyusController@index')->name('moyus.index');
 Route::get('/moyus/{moyu}', 'MoyusController@show')->name('moyus.show');
+Route::post('/moyus/{moyu}/replies', 'RepliesController@store')->name('replies.store');
 
 Auth::routes();
 

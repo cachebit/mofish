@@ -9,6 +9,8 @@ class MoyuTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $moyu;
+
     public function setUp()
     {
         parent::setUp();
@@ -27,7 +29,7 @@ class MoyuTest extends TestCase
     /** @test */
     public function a_user_can_read_a_single_moyu()
     {
-      $this->get('/moyus/'.$this->moyu->id)
+      $this->get($this->moyu->path())
             ->assertSee($this->moyu->title);
     }
 
@@ -37,7 +39,7 @@ class MoyuTest extends TestCase
         $reply = factory('App\Reply')
             ->create(['moyu_id' => $this->moyu->id]);
 
-        $this->get('/moyus/'.$this->moyu->id)
+        $this->get($this->moyu->path())
             ->assertSee($reply->body);
     }
 }
