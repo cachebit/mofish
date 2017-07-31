@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/moyus', 'MoyusController@index')->name('moyus.index');
+Route::get('/moyus/{moyu}', 'MoyusController@show')->name('moyus.show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

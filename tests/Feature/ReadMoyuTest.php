@@ -1,0 +1,43 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+class MoyuTest extends TestCase
+{
+    use DatabaseMigrations;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->moyu = factory('App\Moyu')->create();
+    }
+
+    /** @test */
+    public function a_user_can_brower_moyus()
+    {
+        $this->get('/moyus')
+            ->assertSee($this->moyu->title);
+    }
+
+
+    /** @test */
+    public function a_user_can_read_a_single_moyu()
+    {
+      $this->get('/moyus/'.$this->moyu->id)
+            ->assertSee($this->moyu->title);
+    }
+
+    /** @test */
+    public function a_user_can_read_the_replies_of_a_moyu($value='')
+    {
+        $reply = factory('App\Reply')
+            ->create(['moyu_id' => $this->moyu->id]);
+
+        $this->get('/moyus/'.$this->moyu->id)
+            ->assertSee($reply->body);
+    }
+}
