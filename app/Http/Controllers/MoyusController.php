@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class MoyusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +42,14 @@ class MoyusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $moyu = Moyu::create([
+          'user_id' => auth()->id(),
+          'title' => request('title'),
+          'img' => '/site/default.png',
+          'thumbnail' => '/site/thumbnail.png',
+        ]);
+
+        return redirect($moyu->path());
     }
 
     /**

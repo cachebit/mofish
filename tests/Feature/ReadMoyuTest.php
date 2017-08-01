@@ -40,6 +40,6 @@ class MoyuTest extends TestCase
             ->create(['moyu_id' => $this->moyu->id]);
 
         $this->get($this->moyu->path())
-            ->assertSee($reply->body);
+             ->assertSee($reply->body);
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $moyu->title)
 
 @section('content')
 <div class="container">
