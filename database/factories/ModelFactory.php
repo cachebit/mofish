@@ -29,9 +29,20 @@ $factory->define(App\Moyu::class, function($faker){
     'user_id' => function(){
         return factory('App\User')->create()->id;
     },
+    'channel_id' => function(){
+        return factory('App\Channel')->create()->id;
+    },
     'title' => $faker->sentence,
     'img' => '/site/default.png',
     'thumbnail' => '/site/thumbnail.png',
+  ];
+});
+
+$factory->define(App\Channel::class, function($faker){
+  $name = $faker->word;
+  return [
+    'name' => $name,
+    'slug' => $name
   ];
 });
 

@@ -18,7 +18,7 @@
             <div class="panel-default">
               <div class="panel-body">
                 @if(auth()->check())
-                <form class="" action="{{ route('replies.store', $moyu->id) }}" method="post">
+                <form class="" action="{{ $moyu->path().'/replies' }}" method="post">
                   {{ csrf_field() }}
 
                   <div class="form-group">

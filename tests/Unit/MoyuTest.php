@@ -19,15 +19,25 @@ class MoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_moyu_has_replies()
+    public function a_moyu_can_make_a_string_path()
     {
-       $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->moyu->replies);
+        $moyu = create('App\Moyu');
+
+        $this->assertEquals(
+          "/moyus/{$moyu->channel->slug}/{$moyu->id}", $moyu->path()
+        );
     }
 
     /** @test */
     public function a_moyu_has_a_creator()
     {
         $this->assertInstanceOf('App\User', $this->moyu->creator);
+    }
+
+    /** @test */
+    public function a_moyu_has_replies()
+    {
+       $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->moyu->replies);
     }
 
     /** @test */
@@ -39,5 +49,13 @@ class MoyuTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->moyu->replies );
+    }
+
+    /** @test */
+    public function a_moyu_belongs_to_a_channel()
+    {
+        $moyu = create('App\Moyu');
+
+        $this->assertInstanceOf('App\Channel', $moyu->channel);
     }
 }

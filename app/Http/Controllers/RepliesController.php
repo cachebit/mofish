@@ -12,7 +12,7 @@ class RepliesController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Moyu $moyu)
+    public function store($channelId, Moyu $moyu)
     {
         $moyu->addReply([
             'body' => request('body'),

@@ -12,16 +12,12 @@ class CreateMoyuTest extends TestCase
     /** @test */
     public function guest_may_not_create_a_moyu()
     {
-        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->withExceptionHandling();
 
-        $this->post('/moyus', []);
-    }
+        $this->get('/moyus/create')
+            ->assertRedirect('/login');
 
-    /** @test */
-    public function guest_may_not_see_the_create_page()
-    {
-        $this->withExceptionHandling()
-            ->get('/moyus/create')
+        $this->post('/moyus', [])
             ->assertRedirect('/login');
     }
 

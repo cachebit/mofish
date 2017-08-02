@@ -44,6 +44,7 @@ class MoyusController extends Controller
     {
         $moyu = Moyu::create([
           'user_id' => auth()->id(),
+          'channel_id' => request('channel_id'),
           'title' => request('title'),
           'img' => '/site/default.png',
           'thumbnail' => '/site/thumbnail.png',
@@ -58,7 +59,7 @@ class MoyusController extends Controller
      * @param  \App\Moyu  $moyu
      * @return \Illuminate\Http\Response
      */
-    public function show(Moyu $moyu)
+    public function show($channelId, Moyu $moyu)
     {
         return view('moyus.show', compact('moyu'));
     }

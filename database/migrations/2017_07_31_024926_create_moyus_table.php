@@ -15,7 +15,8 @@ class CreateMoyusTable extends Migration
     {
         Schema::create('moyus', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('channel_id');
             $table->string('title');
             $table->string('img');
             $table->string('thumbnail');

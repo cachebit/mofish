@@ -12,9 +12,9 @@ class ParticipateInFroumTest extends TestCase
     /** @test */
     public function unauthenticated_user_can_not_participate_in_moyu()
     {
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-
-        $this->post('/moyus/1/replies', []);
+        $this->withExceptionHandling()
+            ->post('/moyus/channel/1/replies', [])
+            ->assertRedirect('/login');
     }
 
     /** @test */
