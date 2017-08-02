@@ -42,6 +42,13 @@ class MoyusController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(), [
+          'title' => 'required',
+          'img' => 'required',
+          'thumbnail' => 'required',
+          'channel_id' => 'required|exists:channels,id'
+        ]);
+
         $moyu = Moyu::create([
           'user_id' => auth()->id(),
           'channel_id' => request('channel_id'),

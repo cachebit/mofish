@@ -31,4 +31,16 @@ class ParticipateInFroumTest extends TestCase
           ->assertSee($reply->body);
 
     }
+
+    /** @test */
+    public function a_reply_requires_a_body()
+    {
+        $this->withExceptionHandling()->signIn();
+
+        $moyu = create('App\Moyu');
+
+        $reply = make('App\Reply', ['body' => null]);
+        $this->post($moyu->path().'/replies', $reply->toArray())
+            ->assertSessionHasErrors('body');
+    }
 }

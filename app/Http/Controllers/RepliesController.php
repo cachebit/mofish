@@ -14,6 +14,8 @@ class RepliesController extends Controller
 
     public function store($channelId, Moyu $moyu)
     {
+        $this->validate(request(),['body' => 'required']);
+
         $moyu->addReply([
             'body' => request('body'),
             'user_id' => auth()->id(),

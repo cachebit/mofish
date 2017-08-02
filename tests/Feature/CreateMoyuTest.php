@@ -26,14 +26,54 @@ class CreateMoyuTest extends TestCase
     {
         $this->signIn();
 
-        $this->post('/moyus', raw('App\Moyu'));
+        $moyu = make('App\Moyu');
 
-        $this->assertCount(1, \App\Moyu::all());
+        $response = $this->post('/moyus', $moyu->toArray());
 
-        $moyu = \App\Moyu::first();
-
-        $this->get($moyu->path())
+        $this->get($response->headers->get('Location'))
             ->assertSee($moyu->title)
             ->assertSee($moyu->img);
+    }
+
+    /** @test */
+    public function a_muyu_requires_a_title()
+    {
+        $this->publishMoyu(['title' => null])
+            ->assertSessionHasErrors('title');
+    }
+
+    /** @test */
+    public function a_muyu_requires_a_img()
+    {
+        $this->publishMoyu(['img' => null])
+            ->assertSessionHasErrors('img');
+    }
+
+    /** @test */
+    public function a_muyu_requires_a_thumbnail()
+    {
+        $this->publishMoyu(['thumbnail' => null])
+            ->assertSessionHasErrors('thumbnail');
+    }
+
+    /** @test */
+    public function a_muyu_requires_a_valid_channel()
+    {
+        factory('App\Channel', 2)->create();
+
+        $this->publishMoyu(['channel_id' => null])
+            ->assertSessionHasErrors('channel_id');
+
+        $this->publishMoyu(['channel_id' => 999])
+            ->assertSessionHasErrors('channel_id');
+    }
+
+    public function publishMoyu($overwrite = [])
+    {
+      $this->withExceptionHandling()->signIn();
+
+      $moyu = make('App\Moyu', $overwrite);
+
+      return $this->post('/moyus', $moyu->toArray());
     }
 }
