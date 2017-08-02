@@ -18,6 +18,14 @@ class CreateMoyuTest extends TestCase
     }
 
     /** @test */
+    public function guest_may_not_see_the_create_page()
+    {
+        $this->withExceptionHandling()
+            ->get('/moyus/create')
+            ->assertRedirect('/login');
+    }
+
+    /** @test */
     public function an_authenticated_user_can_create_a_moyu()
     {
         $this->signIn();

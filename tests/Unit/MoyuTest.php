@@ -15,7 +15,7 @@ class MoyuTest extends TestCase
     {
         parent::setUp();
 
-        $this->moyu = factory('App\Moyu')->create();
+        $this->moyu = create('App\Moyu');
     }
 
     /** @test */

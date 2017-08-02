@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class MoyuTest extends TestCase
+class ReadMoyuTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -15,7 +15,7 @@ class MoyuTest extends TestCase
     {
         parent::setUp();
 
-        $this->moyu = factory('App\Moyu')->create();
+        $this->moyu = create('App\Moyu');
     }
 
     /** @test */
@@ -36,8 +36,7 @@ class MoyuTest extends TestCase
     /** @test */
     public function a_user_can_read_the_replies_of_a_moyu($value='')
     {
-        $reply = factory('App\Reply')
-            ->create(['moyu_id' => $this->moyu->id]);
+        $reply = create('App\Reply', ['moyu_id' => $this->moyu->id]);
 
         $this->get($this->moyu->path())
              ->assertSee($reply->body);

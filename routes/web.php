@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/moyus', 'MoyusController@index')->name('moyus.index');
+Route::get('/moyus/create', 'MoyusController@create')->name('moyus.create');
 Route::post('/moyus', 'MoyusController@store')->name('moyus.store');
 Route::get('/moyus/{moyu}', 'MoyusController@show')->name('moyus.show');
 Route::post('/moyus/{moyu}/replies', 'RepliesController@store')->name('replies.store');

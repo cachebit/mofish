@@ -20,11 +20,11 @@ class ParticipateInFroumTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_paticipate_in_moyu()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->signIn();
 
-        $moyu = factory('App\Moyu')->create();
+        $moyu = create('App\Moyu');
 
-        $reply = factory('App\Reply')->make();
+        $reply = make('App\Reply');
         $this->post($moyu->path().'/replies', $reply->toArray());
 
         $this->get($moyu->path())
