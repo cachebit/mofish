@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Channel;
 use App\Moyu;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,13 @@ class MoyusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Channel $channel)
     {
-        $moyus = Moyu::all();
+        if($channel->exists){
+          $moyus = $channel->moyus()->get();
+        }else{
+          $moyus = Moyu::all();
+        }
 
         return view('moyus.index',compact('moyus'));
     }

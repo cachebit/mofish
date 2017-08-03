@@ -41,4 +41,16 @@ class ReadMoyuTest extends TestCase
         $this->get($this->moyu->path())
              ->assertSee($reply->body);
     }
+
+    /** @test */
+    public function a_user_can_filter_moyus_according_to_a_channel()
+    {
+        $channel = create('App\Channel');
+        $moyuInChannel = create('App\Moyu', ['channel_id' => $channel->id]);
+        $moyuNotInChannel = create('App\Moyu');
+
+        $this->get('/moyus/' . $channel->slug)
+            ->assertSee($moyuInChannel->title)
+            ->assertDontSee($moyuNotInChannel->title);
+    }
 }
