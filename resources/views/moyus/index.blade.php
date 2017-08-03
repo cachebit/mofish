@@ -18,9 +18,17 @@
                       </a>
                   </div>
                   <div class="col-sm-10">
-                      <a href="{{ $moyu->path() }}">
-                        <h4>{{ $moyu->title }}</h4>
-                      </a>
+                    <ul class="list-inline">
+                      <li>
+                        <a href="{{ $moyu->path() }}">
+                          <h4>{{ $moyu->title }}</h4>
+                        </a>
+                      </li>
+                      <li class="pull-right">
+                        <a href="{{ $moyu->path() }}">{{ $moyu->replies_count }} {{ str_plural('reply', $moyu->replies_count) }}</a>
+                      </li>
+                    </ul>
+
                   </div>
               </div>
               <hr>

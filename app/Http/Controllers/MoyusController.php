@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filter\MoyuFilters;
 use App\Channel;
 use App\Moyu;
 use Illuminate\Http\Request;
@@ -18,21 +19,9 @@ class MoyusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Channel $channel)
+    public function index(Channel $channel, MoyuFilters $filters)
     {
-        if($channel->exists){
-          $moyus = $channel->moyus();
-        }else{
-          $moyus = Moyu::latest();
-        }
-
-        if($username = request('by')){
-          $user = \App\User::where('name', $username)->firstOrFail();
-
-          $moyus->where('user_id', $user->id);
-        }
-
-        $moyus = $moyus->get();
+        $moyus = $this->getMoyus($channel, $filters);
 
         return view('moyus.index',compact('moyus'));
     }
@@ -119,5 +108,16 @@ class MoyusController extends Controller
     public function destroy(Moyu $moyu)
     {
         //
+    }
+
+    public function getMoyus(Channel $channel, MoyuFilters $filters)
+    {
+        $moyus = Moyu::latest()->filter($filters);
+
+        if($channel->exists){
+           $moyus->where('channel_id', $channel->id);
+        }
+
+        return $moyus->get();
     }
 }
