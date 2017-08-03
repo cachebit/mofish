@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
               <a href="#">{{ $moyu->creator->name }}</a> posted:
@@ -35,11 +35,24 @@
 
 
             <div class="panel-body">
-              @foreach($moyu->replies as $reply)
+              @foreach($replies as $reply)
               @include('moyus.reply')
               @endforeach
             </div>
+            {{ $replies->links() }}
 
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>
+                This Moyu is published at {{ $moyu->created_at->diffForHumans() }}
+                by <a href="#">{{ $moyu->creator->name }}</a>, and currently has
+                {{ $moyu->replies_count }} {{ str_plural('reply', $moyu->replies_count) }}.
+              </p>
+            </div>
           </div>
         </div>
     </div>
