@@ -21,10 +21,18 @@ class MoyusController extends Controller
     public function index(Channel $channel)
     {
         if($channel->exists){
-          $moyus = $channel->moyus()->get();
+          $moyus = $channel->moyus();
         }else{
-          $moyus = Moyu::all();
+          $moyus = Moyu::latest();
         }
+
+        if($username = request('by')){
+          $user = \App\User::where('name', $username)->firstOrFail();
+
+          $moyus->where('user_id', $user->id);
+        }
+
+        $moyus = $moyus->get();
 
         return view('moyus.index',compact('moyus'));
     }

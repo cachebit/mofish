@@ -53,4 +53,18 @@ class ReadMoyuTest extends TestCase
             ->assertSee($moyuInChannel->title)
             ->assertDontSee($moyuNotInChannel->title);
     }
+
+    /** @test */
+    public function a_user_can_filter_moyus_by_any_username()
+    {
+        $this->signIn(create('App\User', ['name' => 'John']));
+
+        $moyuByJohn = create('App\Moyu', ['user_id' => auth()->id()]);
+        $moyuNotByJohn = create('App\Moyu');
+
+        $this->get('/moyus?by=John')
+            ->assertSee($moyuByJohn->title)
+            ->assertDontSee($moyuNotByJohn->title);
+
+    }
 }

@@ -36,8 +36,18 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/moyus">moyus</a></li>
-                        
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                          Browse <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a href="/moyus">All Moyus</a></li>
+                          @if(auth()->check())
+                          <li><a href="/moyus/?by={{ auth()->user()->name }}">My Moyus</a></li>
+                          @endif
+                        </ul>
+                      </li>
+
                         <li><a href="/moyus/create">New moyu</a></li>
 
                         <li class="dropdown">
@@ -45,7 +55,7 @@
                             Channel <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu">
-                            @foreach(App\Channel::all() as $channel)
+                            @foreach($channels as $channel)
                               <li><a href="/moyus/{{ $channel->slug }}">{{ $channel->name }}</a></li>
                             @endforeach
                           </ul>
