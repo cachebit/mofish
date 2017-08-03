@@ -68,19 +68,19 @@ class ReadMoyuTest extends TestCase
 
     }
 
-    // /** @test */
-    // public function a_user_can_filter_moyus_by_popularity()
-    // {
-    //     $moyuWithTwoReplies = create('App\Moyu');
-    //     create('App\Reply', ['moyu_id' => $moyuWithTwoReplies->id], 2);
-    //
-    //     $moyuWithThreeReplies = create('App\Moyu');
-    //     create('App\Reply', ['moyu_id' => $moyuWithTwoReplies->id], 3);
-    //
-    //     $moyuWithNoReplies = $this->moyu;
-    //
-    //     $response = $this->getJson('/moyus?popularity=1')->json();
-    //
-    //     $this->assertEquals([3,2,0], array_column($response, 'replies_count'));
-    // }
+    /** @test */
+    public function a_user_can_filter_moyus_by_popularity()
+    {
+        $moyuWithTwoReplies = create('App\Moyu');
+        create('App\Reply', ['moyu_id' => $moyuWithTwoReplies->id], 2);
+
+        $moyuWithThreeReplies = create('App\Moyu');
+        create('App\Reply', ['moyu_id' => $moyuWithThreeReplies->id], 3);
+
+        $moyuWithNoReplies = $this->moyu;
+
+        $response = $this->getJson('/moyus?popular=1')->json();
+
+        $this->assertEquals([3,2,0], array_column($response, 'replies_count'));
+    }
 }

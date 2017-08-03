@@ -45,6 +45,7 @@
                           @if(auth()->check())
                           <li><a href="/moyus/?by={{ auth()->user()->name }}">My Moyus</a></li>
                           @endif
+                          <li><a href="/moyus?popular=1">Popular Moyus</a></li>
                         </ul>
                       </li>
 

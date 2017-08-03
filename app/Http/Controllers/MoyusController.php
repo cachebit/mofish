@@ -23,6 +23,10 @@ class MoyusController extends Controller
     {
         $moyus = $this->getMoyus($channel, $filters);
 
+        if(request()->wantsJson()){
+          return $moyus;
+        }
+
         return view('moyus.index',compact('moyus'));
     }
 
