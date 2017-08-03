@@ -37,6 +37,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="/moyus">moyus</a></li>
+                        
+                        <li><a href="/moyus/create">New moyu</a></li>
 
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -48,6 +50,7 @@
                             @endforeach
                           </ul>
                         </li>
+
 
                     </ul>
 

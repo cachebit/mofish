@@ -14,22 +14,45 @@
                 {{ csrf_field() }}
 
                 <div class="form-group">
+                  <label for="channel_id">Choose a Channel:</label>
+                  <select class="form-control" name="channel_id" value="{{ old('title') }}" required>
+                    <option value="">Choose one...</option>
+                      @foreach(App\Channel::all() as $channel)
+                        <option value="{{ $channel->id }}" {{ old('channel_id') == $channel->id? 'selected':'' }}>
+                          {{ $channel->name }}
+                        </option>
+                      @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
                   <label for="title">Title:</label>
-                  <input class="form-control" type="text" name="title" value="">
+                  <input class="form-control" type="text" name="title" value="{{ old('title') }}" required>
                 </div>
 
                 <div class="form-group">
                   <label for="img">Img:</label>
-                  <input class="form-control" type="text" name="img" value="/site/default.png" disabled>
+                  <input class="form-control" type="text" name="img" value="/site/default.png" required>
                 </div>
 
                 <div class="form-group">
                   <label for="thumbnail">Thumbnail:</label>
-                  <input class="form-control" type="text" name="thumbnail" value="/site/thumbnail.png" disabled>
+                  <input class="form-control" type="text" name="thumbnail" value="/site/thumbnail.png" required>
                 </div>
 
-                <button class="btn btn-default" type="submit" name="button">Publish</button>
+                <div class="form-group">
+                  <button class="btn btn-default" type="submit" name="button">Publish</button>
+                </div>
+
+                @if(count($errors))
+                  <ul class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                @endif
               </form>
+
             </div>
           </div>
 
