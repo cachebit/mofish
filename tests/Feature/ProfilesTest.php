@@ -19,7 +19,7 @@ class ProfilesTest extends TestCase
     }
 
     /** @test */
-    public function profiles_display_all_moyus_created_by_the_associated_user()
+    function profiles_display_all_moyus_created_by_the_associated_user()
     {
       $user = create('App\User');
 

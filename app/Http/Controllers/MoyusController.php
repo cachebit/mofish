@@ -72,7 +72,7 @@ class MoyusController extends Controller
      * @param  \App\Moyu  $moyu
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId, Moyu $moyu)
+    public function show($channel, Moyu $moyu)
     {
         return view('moyus.show', [
           'moyu' => $moyu,
@@ -109,9 +109,15 @@ class MoyusController extends Controller
      * @param  \App\Moyu  $moyu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Moyu $moyu)
+    public function destroy($channel, Moyu $moyu)
     {
-        //
+        $moyu->delete();
+
+        if(request()->wantsJson()){
+          return response([], 204);
+        }
+
+        return redirect('/moyus');
     }
 
     public function getMoyus(Channel $channel, MoyuFilters $filters)

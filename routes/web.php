@@ -22,6 +22,7 @@ Route::get('/moyus', 'MoyusController@index')->name('moyus.index');
 Route::get('/moyus/create', 'MoyusController@create')->name('moyus.create');
 Route::post('/moyus', 'MoyusController@store')->name('moyus.store');
 Route::get('/moyus/{channel}/{moyu}', 'MoyusController@show')->name('moyus.show');
+Route::delete('/moyus/{channel}/{moyu}', 'MoyusController@destroy')->name('moyus.show');
 Route::get('/moyus/{channel}', 'MoyusController@index');
 Route::post('/moyus', 'MoyusController@store')->name('moyus.store');
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');;

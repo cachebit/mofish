@@ -68,7 +68,39 @@ class CreateMoyuTest extends TestCase
             ->assertSessionHasErrors('channel_id');
     }
 
-    function publishMoyu($overwrite = [])
+    /** @test */
+    function guest_can_not_delete_moyu()
+    {
+        $moyu = create('App\Moyu');
+
+        $this->withExceptionHandling()
+             ->delete($moyu->path())
+             ->assertRedirect('/login');
+    }
+
+    /** @test */
+    function a_moyu_can_be_deleted()
+    {
+        $this->signIn();
+
+        $moyu = create('App\Moyu');
+        $reply = create('App\Reply', ['moyu_id' => $moyu->id]);
+
+        $response = $this->json('DELETE', $moyu->path());
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('moyus', ['id'=> $moyu->id]);
+        $this->assertDatabaseMissing('replies', ['id'=> $reply->id]);
+    }
+
+    /** @test */
+    function moyu_may_only_be_deleted_by_those_who_have_permission()
+    {
+        //todo
+    }
+
+    protected function publishMoyu($overwrite = [])
     {
       $this->withExceptionHandling()->signIn();
 
