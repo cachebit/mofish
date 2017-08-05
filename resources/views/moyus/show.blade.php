@@ -7,7 +7,7 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <a href="#">{{ $moyu->creator->name }}</a> posted:
+              <a href="/profiles/{{ $moyu->creator->name }}">{{ $moyu->creator->name }}</a> posted:
               {{ $moyu->title }}
             </div>
             <div class="panel-body">

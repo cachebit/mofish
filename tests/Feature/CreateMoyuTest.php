@@ -10,7 +10,7 @@ class CreateMoyuTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function guest_may_not_create_a_moyu()
+    function guest_may_not_create_a_moyu()
     {
         $this->withExceptionHandling();
 
@@ -22,7 +22,7 @@ class CreateMoyuTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_create_a_moyu()
+    function an_authenticated_user_can_create_a_moyu()
     {
         $this->signIn();
 
@@ -36,28 +36,28 @@ class CreateMoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_muyu_requires_a_title()
+    function a_muyu_requires_a_title()
     {
         $this->publishMoyu(['title' => null])
             ->assertSessionHasErrors('title');
     }
 
     /** @test */
-    public function a_muyu_requires_a_img()
+    function a_muyu_requires_a_img()
     {
         $this->publishMoyu(['img' => null])
             ->assertSessionHasErrors('img');
     }
 
     /** @test */
-    public function a_muyu_requires_a_thumbnail()
+    function a_muyu_requires_a_thumbnail()
     {
         $this->publishMoyu(['thumbnail' => null])
             ->assertSessionHasErrors('thumbnail');
     }
 
     /** @test */
-    public function a_muyu_requires_a_valid_channel()
+    function a_muyu_requires_a_valid_channel()
     {
         factory('App\Channel', 2)->create();
 
@@ -68,7 +68,7 @@ class CreateMoyuTest extends TestCase
             ->assertSessionHasErrors('channel_id');
     }
 
-    public function publishMoyu($overwrite = [])
+    function publishMoyu($overwrite = [])
     {
       $this->withExceptionHandling()->signIn();
 

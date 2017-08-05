@@ -26,3 +26,5 @@ Route::get('/moyus/{channel}', 'MoyusController@index');
 Route::post('/moyus', 'MoyusController@store')->name('moyus.store');
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');;
 Route::post('/moyus/{channel}/{moyu}/replies', 'RepliesController@store')->name('replies.store');
+
+Route::get('/profiles/{user}', 'ProfilesController@show');

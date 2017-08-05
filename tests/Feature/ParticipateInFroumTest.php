@@ -10,7 +10,7 @@ class ParticipateInFroumTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function unauthenticated_user_can_not_participate_in_moyu()
+    function unauthenticated_user_can_not_participate_in_moyu()
     {
         $this->withExceptionHandling()
             ->post('/moyus/channel/1/replies', [])
@@ -18,7 +18,7 @@ class ParticipateInFroumTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_paticipate_in_moyu()
+    function an_authenticated_user_can_paticipate_in_moyu()
     {
         $this->signIn();
 
@@ -33,7 +33,7 @@ class ParticipateInFroumTest extends TestCase
     }
 
     /** @test */
-    public function a_reply_requires_a_body()
+    function a_reply_requires_a_body()
     {
         $this->withExceptionHandling()->signIn();
 

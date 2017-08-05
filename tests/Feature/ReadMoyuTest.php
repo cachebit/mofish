@@ -11,7 +11,7 @@ class ReadMoyuTest extends TestCase
 
     protected $moyu;
 
-    public function setUp()
+    function setUp()
     {
         parent::setUp();
 
@@ -19,7 +19,7 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_brower_moyus()
+    function a_user_can_brower_moyus()
     {
         $this->get('/moyus')
             ->assertSee($this->moyu->title);
@@ -27,14 +27,14 @@ class ReadMoyuTest extends TestCase
 
 
     /** @test */
-    public function a_user_can_read_a_single_moyu()
+    function a_user_can_read_a_single_moyu()
     {
       $this->get($this->moyu->path())
             ->assertSee($this->moyu->title);
     }
 
     /** @test */
-    public function a_user_can_read_the_replies_of_a_moyu($value='')
+    function a_user_can_read_the_replies_of_a_moyu($value='')
     {
         $reply = create('App\Reply', ['moyu_id' => $this->moyu->id]);
 
@@ -43,7 +43,7 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_moyus_according_to_a_channel()
+    function a_user_can_filter_moyus_according_to_a_channel()
     {
         $channel = create('App\Channel');
         $moyuInChannel = create('App\Moyu', ['channel_id' => $channel->id]);
@@ -55,7 +55,7 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_moyus_by_any_username()
+    function a_user_can_filter_moyus_by_any_username()
     {
         $this->signIn(create('App\User', ['name' => 'John']));
 
@@ -69,7 +69,7 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_moyus_by_popularity()
+    function a_user_can_filter_moyus_by_popularity()
     {
         $moyuWithTwoReplies = create('App\Moyu');
         create('App\Reply', ['moyu_id' => $moyuWithTwoReplies->id], 2);

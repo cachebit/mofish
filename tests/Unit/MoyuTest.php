@@ -11,7 +11,7 @@ class MoyuTest extends TestCase
 
     protected $moyu;
 
-    public function setUp()
+    function setUp()
     {
         parent::setUp();
 
@@ -19,7 +19,7 @@ class MoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_moyu_can_make_a_string_path()
+    function a_moyu_can_make_a_string_path()
     {
         $moyu = create('App\Moyu');
 
@@ -29,19 +29,19 @@ class MoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_moyu_has_a_creator()
+    function a_moyu_has_a_creator()
     {
         $this->assertInstanceOf('App\User', $this->moyu->creator);
     }
 
     /** @test */
-    public function a_moyu_has_replies()
+    function a_moyu_has_replies()
     {
        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->moyu->replies);
     }
 
     /** @test */
-    public function a_moyu_can_add_a_reply()
+    function a_moyu_can_add_a_reply()
     {
         $this->moyu->addReply([
           'body' => 'FooBar',
@@ -52,7 +52,7 @@ class MoyuTest extends TestCase
     }
 
     /** @test */
-    public function a_moyu_belongs_to_a_channel()
+    function a_moyu_belongs_to_a_channel()
     {
         $moyu = create('App\Moyu');
 
