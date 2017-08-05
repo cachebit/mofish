@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      
+
       <div class="page-header">
         <h1>
           {{ $profileUser->name }}
@@ -14,9 +14,11 @@
       </div>
 
       <div class="row">
-        @foreach($moyus as $moyu)
+        @forelse($moyus as $moyu)
           @include('moyus.moyu')
-        @endforeach
+        @empty
+          <p>No Result Now.</p>
+        @endforelse
         {{ $moyus->links() }}
       </div>
 

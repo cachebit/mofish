@@ -7,8 +7,22 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <a href="/profiles/{{ $moyu->creator->name }}">{{ $moyu->creator->name }}</a> posted:
-              {{ $moyu->title }}
+              <ul class="list-inline">
+                <li>
+                  <a href="/profiles/{{ $moyu->creator->name }}">{{ $moyu->creator->name }}</a> posted:
+                  {{ $moyu->title }}
+                </li>
+                @can('update', $moyu)
+                <li class="pull-right">
+                  <form action="{{ $moyu->path() }}" method="post">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+
+                    <button class="btn btn-xs btn-link" type="submit" name="button">X</button>
+                  </form>
+                </li>
+                @endcan
+              </ul>
             </div>
             <div class="panel-body">
               <img src="{{ $moyu->img }}" class="img-responsive" alt="">

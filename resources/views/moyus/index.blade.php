@@ -4,9 +4,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @foreach($moyus as $moyu)
+        @forelse($moyus as $moyu)
           @include('moyus.moyu')
-        @endforeach
+        @empty
+          <p>No Result Now.</p>
+        @endforelse 
     </div>
 </div>
 @endsection

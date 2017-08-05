@@ -69,21 +69,25 @@ class CreateMoyuTest extends TestCase
     }
 
     /** @test */
-    function guest_can_not_delete_moyu()
+    function unauthorized_users_may_not_delete_moyus()
     {
+        $this->withExceptionHandling();
+
         $moyu = create('App\Moyu');
 
-        $this->withExceptionHandling()
-             ->delete($moyu->path())
-             ->assertRedirect('/login');
+        $this->delete($moyu->path())->assertRedirect('/login');
+
+        $this->signIn();
+        $this->delete($moyu->path())->assertStatus(403);
+
     }
 
     /** @test */
-    function a_moyu_can_be_deleted()
+    function authorized_users_can_delete_moyus()
     {
         $this->signIn();
 
-        $moyu = create('App\Moyu');
+        $moyu = create('App\Moyu', ['user_id' => auth()->id()]);
         $reply = create('App\Reply', ['moyu_id' => $moyu->id]);
 
         $response = $this->json('DELETE', $moyu->path());
