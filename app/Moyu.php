@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moyu extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
 
     protected $with = ['creator', 'channel'];
