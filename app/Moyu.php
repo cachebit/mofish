@@ -16,12 +16,12 @@ class Moyu extends Model
     {
       parent::boot();
 
-      static::addGlobalScope('replyCount', function($builder){
+      static::addGlobalScope('replyCount', function ($builder){
         $builder->withCount('replies');
       });
 
       static::deleting(function($moyu){
-        $moyu->replies()->delete();
+        $moyu->replies->each->delete();
       });
     }
 
@@ -53,5 +53,10 @@ class Moyu extends Model
     public function scopeFilter($query, $filters)
     {
       return $filters->apply($query);
+    }
+
+    public function activity()
+    {
+      return $this->morphMany('App\Activity', 'subject');
     }
 }

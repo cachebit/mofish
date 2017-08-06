@@ -47,7 +47,7 @@ class ActivityTest extends TestCase
 
         create('App\Moyu', ['user_id' => auth()->id()], 2);
 
-        auth()->user()->activities()->first()->update(['created_at' => Carbon::now()->subweek()]);
+        auth()->user()->activity()->first()->update(['created_at' => Carbon::now()->subweek()]);
 
         $feed = Activity::feed(auth()->user());
 

@@ -112,9 +112,6 @@ class MoyusController extends Controller
     public function destroy($channel, Moyu $moyu)
     {
         $this->authorize('update', $moyu);
-        if($moyu->user_id != auth()->id()){
-          abort(403, 'You do not have the permission to do this!');
-        }
 
         $moyu->delete();
 

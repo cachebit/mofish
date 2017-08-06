@@ -96,6 +96,8 @@ class CreateMoyuTest extends TestCase
 
         $this->assertDatabaseMissing('moyus', ['id'=> $moyu->id]);
         $this->assertDatabaseMissing('replies', ['id'=> $reply->id]);
+
+        $this->assertEquals(0, \App\Activity::count());
     }
 
     /** @test */
