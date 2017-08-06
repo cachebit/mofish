@@ -12,15 +12,14 @@
           <small>Since {{ $profileUser->created_at->diffForHumans() }}</small>
         </h1>
       </div>
-
-      <div class="row">
-        @forelse($moyus as $moyu)
-          @include('moyus.moyu')
-        @empty
-          <p>No Result Now.</p>
-        @endforelse
-        {{ $moyus->links() }}
-      </div>
+      @foreach($activities as $date => $activity)
+        <h3 class="page-header">
+          {{ $date }}
+        </h3>
+        @foreach($activity as $record)
+          @include("profiles.activities.$record->type", ['activity' => $record])
+        @endforeach
+      @endforeach
 
     </div>
   </div>

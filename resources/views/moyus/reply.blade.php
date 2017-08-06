@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <ul class="list-inline">
       <li>
-        <a href="/profiles/{{ $moyu->creator->name }}">
+        <a href="/profiles/{{ $reply->owner->name }}">
           {{ $reply->owner->name }}
         </a> said {{ $reply->created_at->diffForHumans() }}...
       </li>

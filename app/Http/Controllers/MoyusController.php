@@ -76,7 +76,7 @@ class MoyusController extends Controller
     {
         return view('moyus.show', [
           'moyu' => $moyu,
-          'replies' => $moyu->replies()->paginate(10),
+          'replies' => $moyu->replies()->latest()->paginate(10),
         ]);
     }
 

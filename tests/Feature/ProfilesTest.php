@@ -21,11 +21,11 @@ class ProfilesTest extends TestCase
     /** @test */
     function profiles_display_all_moyus_created_by_the_associated_user()
     {
-      $user = create('App\User');
+      $this->signIn();
 
-      $moyu = create('App\Moyu', ['user_id' => $user->id]);
+      $moyu = create('App\Moyu', ['user_id' => auth()->id()]);
 
-      $this->get("/profiles/$user->name")
+      $this->get("/profiles/" . auth()->user()->name)
            ->assertSee($moyu->title);
     }
 }
