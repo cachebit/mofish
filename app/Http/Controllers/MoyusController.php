@@ -63,7 +63,8 @@ class MoyusController extends Controller
           'thumbnail' => '/site/thumbnail.png',
         ]);
 
-        return redirect($moyu->path());
+        return redirect($moyu->path())
+                ->with('flash', 'Your moyu has been published!');
     }
 
     /**
