@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Moyu;
+use App\Reply;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
@@ -22,5 +23,14 @@ class RepliesController extends Controller
         ]);
 
         return back()->with('flash', 'Replied!');
+    }
+
+    public function destroy(Reply $reply)
+    {
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        return back();
     }
 }
