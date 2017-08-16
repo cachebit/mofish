@@ -21,6 +21,8 @@ window.flash = function(message){
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('reply', require('./components/Reply.vue'));
+
 Vue.component('flash', require('./components/Flash.vue'));
 
 const app = new Vue({
