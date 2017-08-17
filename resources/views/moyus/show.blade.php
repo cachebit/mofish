@@ -30,26 +30,9 @@
             </div>
           </div>
 
-
-          <div class="panel panel-default">
-            <div class="panel-body">
-              @if(auth()->check())
-              <form class="" action="{{ $moyu->path().'/replies' }}" method="post">
-                {{ csrf_field() }}
-
-                <div class="form-group">
-                  <textarea class="form-control" name="body" rows="8" cols="80" placeholder="Post a reply!"></textarea>
-                </div>
-
-                <button class="btn btn-primary" type="submit" name="button">Post</button>
-              </form>
-              @else
-              <p class="text-center">To participate the moyu! Please <a href="{{ route('login') }}">Login</a>!</p>
-              @endif
-            </div>
-          </div>
-
-          <replies :data="{{ $moyu->replies }}"@removed="repliesCount--"></replies>
+          <replies :data="{{ $moyu->replies }}"
+            @added="repliesCount++"
+            @removed="repliesCount--"></replies>
 
             <!-- {{ $replies->links() }} -->
         </div>
