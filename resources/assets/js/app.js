@@ -9,6 +9,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.prototype.authorize = function (handler){
+  let user = window.App.user;
+
+  return user ? handler(user) : false;
+};
+
 window.events = new Vue();
 
 window.flash = function(message){
@@ -21,9 +27,10 @@ window.flash = function(message){
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('reply', require('./components/Reply.vue'));
-
 Vue.component('flash', require('./components/Flash.vue'));
+
+Vue.component('moyu-view', require('./pages/Moyu.vue'));
+
 
 const app = new Vue({
     el: '#app'
