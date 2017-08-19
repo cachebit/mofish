@@ -58,4 +58,29 @@ class MoyuTest extends TestCase
 
         $this->assertInstanceOf('App\Channel', $moyu->channel);
     }
+
+    /** @test */
+    function a_moyu_can_be_subscribed_to()
+    {
+      $moyu = create('App\Moyu');
+
+      $moyu->subscribe($userId = 1);
+
+      $this->assertEquals(
+        1,
+        $moyu->subscriptions()->where('user_id', $userId)->count()
+      );
+    }
+
+    /** @test */
+    function a_moyu_can_be_unsubscribed_from()
+    {
+      $moyu = create('App\Moyu');
+
+      $moyu->subscribe($userId = 1);
+
+      $moyu->unsubscribe($userId);
+
+      $this->assertCount(0, $moyu->subscriptions);
+    }
 }
