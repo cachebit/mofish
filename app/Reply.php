@@ -14,6 +14,19 @@ class Reply extends Model
 
     protected $appends = ['favoritesCount', 'isFavorited'];
 
+    protected static function boot()
+    {
+      parent::boot();
+
+      static::created(function($reply){
+        $reply->moyu->increment('replies_count');
+      });
+
+      static::deleted(function($reply){
+        $reply->moyu->decrement('replies_count');
+      });
+    }
+
     public function moyu()
     {
       return $this->belongsTo('App\Moyu');

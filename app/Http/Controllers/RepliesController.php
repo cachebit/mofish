@@ -15,7 +15,7 @@ class RepliesController extends Controller
 
     public function index($channelId, Moyu $moyu)
     {
-        return $moyu->replies()->paginate(20);
+        return $moyu->replies()->paginate(3);
     }
 
     public function store($channelId, Moyu $moyu)

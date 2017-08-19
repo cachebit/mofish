@@ -16,10 +16,6 @@ class Moyu extends Model
     {
       parent::boot();
 
-      static::addGlobalScope('replyCount', function ($builder){
-        $builder->withCount('replies');
-      });
-
       static::deleting(function($moyu){
         $moyu->replies->each->delete();
       });

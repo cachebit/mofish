@@ -34,15 +34,6 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_read_the_replies_of_a_moyu($value='')
-    {
-        $reply = create('App\Reply', ['moyu_id' => $this->moyu->id]);
-
-        $this->get($this->moyu->path())
-             ->assertSee($reply->body);
-    }
-
-    /** @test */
     function a_user_can_filter_moyus_according_to_a_channel()
     {
         $channel = create('App\Channel');
@@ -85,6 +76,17 @@ class ReadMoyuTest extends TestCase
     }
 
     /** @test */
+    function a_user_can_filter_moyus_by_those_that_are_unanswered()
+    {
+        $moyu = create('App\Moyu');
+        create('App\Reply', ['moyu_id' => $moyu->id]);
+
+        $response = $this->getJson('/moyus?unanswered=1')->json();
+
+        $this->assertCount(1, $response);
+    }
+
+    /** @test */
     function a_user_can_request_all_the_replies_for_a_given_moyu()
     {
         $moyu = create('App\Moyu');
@@ -92,7 +94,7 @@ class ReadMoyuTest extends TestCase
 
         $response = $this->getJson($moyu->path() . '/replies')->json();
 
-        $this->assertCount(1, $response['data']);
+        $this->assertCount(2, $response['data']);
         $this->assertEquals(2, $response['total']);
     }
 }

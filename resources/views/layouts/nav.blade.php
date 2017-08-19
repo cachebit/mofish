@@ -29,6 +29,7 @@
                   <li><a href="/moyus/?by={{ auth()->user()->name }}">My Moyus</a></li>
                   @endif
                   <li><a href="/moyus?popular=1">Popular Moyus</a></li>
+                  <li><a href="/moyus?unanswered=1">Unanswered Moyus</a></li>
                 </ul>
               </li>
 
@@ -64,7 +65,7 @@
                             <li>
                               <a href="/profiles/{{ Auth::user()->name }}">My Pfofile</a>
                             </li>
-                            
+
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

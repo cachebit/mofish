@@ -27,9 +27,8 @@ class ParticipateInFroumTest extends TestCase
         $reply = make('App\Reply');
         $this->post($moyu->path().'/replies', $reply->toArray());
 
-        $this->get($moyu->path())
-          ->assertSee($reply->body);
-
+        $this->assertDatabaseHas('replies', ['body' => $reply->body]);
+        $this->assertEquals(1, $moyu->fresh()->replies_count);
     }
 
     /** @test */
@@ -71,6 +70,7 @@ class ParticipateInFroumTest extends TestCase
         $id = $reply->id;
 
         $this->assertDatabaseMissing('replies', ['id' => $id]);
+        $this->assertEquals(0, $reply->moyu->fresh()->replies_count);        
     }
 
     /** @test */
