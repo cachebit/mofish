@@ -83,4 +83,18 @@ class MoyuTest extends TestCase
 
       $this->assertCount(0, $moyu->subscriptions);
     }
+
+    /** @test */
+    function it_knows_if_an_authenticated_user_is_subscribed_to_it()
+    {
+      $moyu = create('App\Moyu');
+
+      $this->signIn();
+
+      $this->assertFalse($moyu->isSubscribedTo);
+
+      $moyu->subscribe();
+
+      $this->assertTrue($moyu->isSubscribedTo);
+    }
 }

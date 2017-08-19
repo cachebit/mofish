@@ -10,4 +10,9 @@ class MoyuSubscriptionsController extends Controller
     {
       $moyu->subscribe();
     }
+
+    public function destroy($channelId, Moyu $moyu)
+    {
+      $moyu->unsubscribe();
+    }
 }

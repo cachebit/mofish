@@ -12,6 +12,8 @@ class Moyu extends Model
 
     protected $with = ['creator', 'channel'];
 
+    protected $appends = ['isSubscribedTo'];
+
     protected static function boot()
     {
       parent::boot();
@@ -73,5 +75,12 @@ class Moyu extends Model
     public function subscriptions()
     {
       return $this->hasMany(MoyuSubscription::class);
+    }
+
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+          ->where('user_id', auth()->id())
+          ->exists();
     }
 }

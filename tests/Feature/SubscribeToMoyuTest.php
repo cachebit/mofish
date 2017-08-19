@@ -25,4 +25,18 @@ class SubscribeToMoyuTest extends TestCase
 
       $this->assertCount(1, auth()->user()->notifications);
     }
+
+    /** @test */
+    function a_user_can_unsubscribe_from_moyus()
+    {
+      $this->signIn();
+
+      $moyu = create('App\Moyu');
+
+      $moyu->subscribe();
+
+      $this->delete($moyu->path() . '/subscriptions');
+
+      $this->assertCount(0, $moyu->subscriptions);
+    }
 }

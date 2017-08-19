@@ -31,6 +31,7 @@ Route::patch('/replies/{reply}', 'RepliesController@update');
 Route::post('/moyus/{channel}/{moyu}/replies', 'RepliesController@store')->name('replies.store');
 Route::get('/moyus/{channel}/{moyu}/replies', 'RepliesController@index')->name('replies.index');
 Route::post('/moyus/{channel}/{moyu}/subscriptions', 'MoyuSubscriptionsController@store')->middleware('auth');
+Route::delete('/moyus/{channel}/{moyu}/subscriptions', 'MoyuSubscriptionsController@destroy')->middleware('auth');
 
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
 Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy');

@@ -31,7 +31,7 @@
           </div>
 
           <replies @added="repliesCount++" @removed="repliesCount--"></replies>
-          
+
         </div>
 
         <div class="col-md-4">
@@ -41,6 +41,10 @@
                 This Moyu is published at {{ $moyu->created_at->diffForHumans() }}
                 by <a href="#">{{ $moyu->creator->name }}</a>, and currently has
                 <span v-text="repliesCount"></span> {{ str_plural('reply', $moyu->replies_count) }}.
+              </p>
+
+              <p>
+                <subscribe-button :active="{{ json_encode($moyu->isSubscribedTo) }}"></subscribe-button>
               </p>
             </div>
           </div>

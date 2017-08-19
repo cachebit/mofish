@@ -18,6 +18,7 @@ class CreateMoyuSubscriptionsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('moyu_id');
             $table->timestamps();
+            $table->unique(['user_id', 'moyu_id']);
 
             $table->foreign('moyu_id')
                   ->references('id')
