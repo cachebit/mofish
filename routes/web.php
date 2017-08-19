@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/moyus', 'MoyusController@index')->name('moyus.index');
 Route::get('/moyus/create', 'MoyusController@create')->name('moyus.create');
 Route::post('/moyus', 'MoyusController@store')->name('moyus.store');
@@ -29,6 +30,7 @@ Route::delete('/replies/{reply}', 'RepliesController@destroy');
 Route::patch('/replies/{reply}', 'RepliesController@update');
 Route::post('/moyus/{channel}/{moyu}/replies', 'RepliesController@store')->name('replies.store');
 Route::get('/moyus/{channel}/{moyu}/replies', 'RepliesController@index')->name('replies.index');
+Route::post('/moyus/{channel}/{moyu}/subscriptions', 'MoyuSubscriptionsController@store')->middleware('auth');
 
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
 Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy');
