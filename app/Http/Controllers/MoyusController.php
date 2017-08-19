@@ -75,10 +75,7 @@ class MoyusController extends Controller
      */
     public function show($channel, Moyu $moyu)
     {
-        return view('moyus.show', [
-          'moyu' => $moyu,
-          'replies' => $moyu->replies()->latest()->paginate(10),
-        ]);
+        return view('moyus.show', compact('moyu'));
     }
 
     /**

@@ -29,6 +29,8 @@ window.flash = function(message){
 
 Vue.component('flash', require('./components/Flash.vue'));
 
+Vue.component('paginator', require('./components/Paginator.vue'));
+
 Vue.component('moyu-view', require('./pages/Moyu.vue'));
 
 

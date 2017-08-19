@@ -10,7 +10,12 @@ class RepliesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
+    public function index($channelId, Moyu $moyu)
+    {
+        return $moyu->replies()->paginate(20);
     }
 
     public function store($channelId, Moyu $moyu)

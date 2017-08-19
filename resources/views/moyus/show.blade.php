@@ -30,11 +30,8 @@
             </div>
           </div>
 
-          <replies :data="{{ $moyu->replies }}"
-            @added="repliesCount++"
-            @removed="repliesCount--"></replies>
-
-            <!-- {{ $replies->links() }} -->
+          <replies @added="repliesCount++" @removed="repliesCount--"></replies>
+          
         </div>
 
         <div class="col-md-4">
