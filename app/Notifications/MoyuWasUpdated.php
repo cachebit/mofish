@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class MoyuWasUpdated extends Notification
 {
@@ -57,7 +56,8 @@ class MoyuWasUpdated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'temporary message'
+            'message' => $this->reply->owner->name . 'replied to' . $this->moyu->title,
+            'link' => $this->reply->path(),
         ];
     }
 }
