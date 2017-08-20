@@ -65,3 +65,15 @@ $factory->define(App\Favorite::class, function($faker){
     'favorited_type' => 'App\Reply',
   ];
 });
+
+$factory->define(Illuminate\Notifications\DatabaseNotification::class, function($faker){
+  return [
+    'id' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+    'type' => 'App\Notifications\MoyuWasUpdated',
+    'notifiable_id' => function(){
+      return auth()->id() ?: factory('App\User')->create()->id;
+    },
+    'notifiable_type' => 'App\User',
+    'data' => ['foo' => 'bar']
+  ];
+});
