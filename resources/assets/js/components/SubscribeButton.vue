@@ -15,7 +15,7 @@
     methods:{
       subscribe(){
         axios[
-          this.active ? 'delete' : 'post'
+          (this.active ? 'delete' : 'post')
         ](location.pathname + '/subscriptions');
 
         this.active = ! this.active;
