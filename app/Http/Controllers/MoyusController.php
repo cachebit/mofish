@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filter\MoyuFilters;
 use App\Channel;
 use App\Moyu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MoyusController extends Controller
@@ -75,6 +76,11 @@ class MoyusController extends Controller
      */
     public function show($channel, Moyu $moyu)
     {
+        if(auth()->check())
+        {
+          auth()->user()->read($moyu);
+        }
+
         return view('moyus.show', compact('moyu'));
     }
 

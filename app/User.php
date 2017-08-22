@@ -43,4 +43,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Activity');
     }
 
+    public function read($moyu)
+    {
+      cache()->forever(
+        $this->visitedMoyuCacheKey($moyu),
+        \Carbon\Carbon::now()
+      );
+
+    }
+
+    public function visitedMoyuCacheKey($moyu)
+    {
+        return sprintf("user.%s.visits.%s", $this->id, $moyu->id);
+    }
 }

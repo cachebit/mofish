@@ -97,4 +97,11 @@ class Moyu extends Model
           ->where('user_id', auth()->id())
           ->exists();
     }
+
+    public function hasUpdatesFor($user)
+    {
+        $key = $user->visitedMoyuCacheKey($this);
+
+        return $this->updated_at > cache($key);
+    }
 }

@@ -5,11 +5,18 @@
       <img src="{{ $moyu->thumbnail }}" class="img-responsive" alt="">
     </a>
     <div class="caption">
-      <a href="{{ $moyu->path() }}">
-        <h5>
-          {{ $moyu->title }}
-        </h5>
-      </a>
+
+      <h5>
+        <a href="{{ $moyu->path() }}">
+          @if($moyu->hasUpdatesFor(auth()->user()))
+            <strong>
+              {{ $moyu->title }}
+            </strong>
+          @else
+            {{ $moyu->title }}
+          @endif
+        </a>
+      </h5>
 
     </div>
     <div class="level">

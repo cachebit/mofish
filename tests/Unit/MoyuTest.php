@@ -115,4 +115,18 @@ class MoyuTest extends TestCase
 
       $this->assertTrue($moyu->isSubscribedTo);
     }
+
+    /** @test */
+    function a_moyu_can_check_if_the_authenticated_user_has_read_it()
+    {
+      $this->signIn();
+
+      $moyu = create('App\Moyu');
+
+      $this->assertTrue($moyu->hasUpdatesFor(auth()->user()));
+
+      auth()->user()->read($moyu);
+
+      $this->assertFalse($moyu->hasUpdatesFor(auth()->user()));
+    }
 }
