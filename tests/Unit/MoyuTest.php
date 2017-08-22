@@ -3,6 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Notifications\MoyuWasUpdated;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MoyuTest extends TestCase
@@ -49,6 +51,22 @@ class MoyuTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->moyu->replies );
+    }
+
+    /** @test */
+    function a_moyu_notifies_all_registered_subscribers_when_a_reply_is_added()
+    {
+      Notification::fake();
+
+      $this->signIn()
+           ->moyu
+           ->subscribe()
+           ->addReply([
+              'body' => 'FooBar',
+              'user_id' => 999,
+            ]);
+
+      Notification::assertSentTo(auth()->user(), MoyuWasUpdated::class);
     }
 
     /** @test */
