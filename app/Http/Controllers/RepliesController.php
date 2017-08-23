@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Spam;
 use App\Moyu;
 use App\Reply;
 use Illuminate\Http\Request;
@@ -18,9 +19,10 @@ class RepliesController extends Controller
         return $moyu->replies()->paginate(3);
     }
 
-    public function store($channelId, Moyu $moyu)
+    public function store($channelId, Moyu $moyu, Spam $spam)
     {
         $this->validate(request(),['body' => 'required']);
+        $spam->detect(request('body'));
 
         $reply = $moyu->addReply([
             'body' => request('body'),

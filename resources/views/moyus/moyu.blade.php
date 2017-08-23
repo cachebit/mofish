@@ -8,7 +8,7 @@
 
       <h5>
         <a href="{{ $moyu->path() }}">
-          @if($moyu->hasUpdatesFor(auth()->user()))
+          @if(auth()->check() and $moyu->hasUpdatesFor(auth()->user()))
             <strong>
               {{ $moyu->title }}
             </strong>

@@ -70,7 +70,7 @@ class ParticipateInFroumTest extends TestCase
         $id = $reply->id;
 
         $this->assertDatabaseMissing('replies', ['id' => $id]);
-        $this->assertEquals(0, $reply->moyu->fresh()->replies_count);        
+        $this->assertEquals(0, $reply->moyu->fresh()->replies_count);
     }
 
     /** @test */
@@ -101,5 +101,20 @@ class ParticipateInFroumTest extends TestCase
         $this->patch("/replies/{$reply->id}", ['body' => $updatedReply]);
 
         $this->assertDatabaseHas('replies', ['id' => $id, 'body' => $updatedReply ]);
+    }
+
+    /** @test */
+    function replies_that_contain_spam_may_not_be_created()
+    {
+      $this->signIn();
+
+      $moyu = create('App\Moyu');
+      $reply = make('App\Reply', [
+        'body' => 'Yahoo customer support'
+      ]);
+
+      $this->expectException(\Exception::class);
+
+      $this->post($moyu->path().'/replies', $reply->toArray());
     }
 }
