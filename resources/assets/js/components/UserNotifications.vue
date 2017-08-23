@@ -23,7 +23,7 @@
     },
 
     created() {
-      axios.get("/profiles/" + window.App.user.name + "/notifications")
+      axios.get('/profiles/' + window.App.user.name + '/notifications')
         .then(response => this.notifications = response.data);
     },
 
